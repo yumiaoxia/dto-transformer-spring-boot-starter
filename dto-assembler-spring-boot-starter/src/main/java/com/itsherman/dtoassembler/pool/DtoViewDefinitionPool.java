@@ -20,7 +20,9 @@ public class DtoViewDefinitionPool {
             } else {
                 dvd = new DtoViewDefinition();
                 dvd.setMd(md);
+                dvd.getVpds().add(viewPropertyDefinition);
                 dvdMap.put(viewClass, dvd);
+
             }
         } else {
             dvdMap = new HashMap<>();
