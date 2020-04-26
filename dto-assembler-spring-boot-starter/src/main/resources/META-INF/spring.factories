@@ -1,0 +1,3 @@
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#com.itsherman.dtoassembler.config.DtoPrepareComponentConfig,
+#com.itsherman.dtoassembler.config.DtoTransformConfig
