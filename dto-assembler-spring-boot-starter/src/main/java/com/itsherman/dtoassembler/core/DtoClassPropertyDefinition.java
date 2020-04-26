@@ -2,8 +2,8 @@ package com.itsherman.dtoassembler.core;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DtoClassPropertyDefinition extends ModelPropertyDefinition {
 
@@ -21,7 +21,7 @@ public class DtoClassPropertyDefinition extends ModelPropertyDefinition {
 
     private String expectFieldName;
 
-    private List<Class<?>> parserClass = new ArrayList<>();
+    private Set<Class<?>> parserClass = new HashSet<>();
 
     private String[] referenceFieldNames;
 
@@ -82,11 +82,11 @@ public class DtoClassPropertyDefinition extends ModelPropertyDefinition {
         this.viewClass = viewClass;
     }
 
-    public List<Class<?>> getParserClass() {
+    public Set<Class<?>> getParserClass() {
         return parserClass;
     }
 
-    public void setParserClass(List<Class<?>> parserClass) {
+    public void setParserClass(Set<Class<?>> parserClass) {
         this.parserClass = parserClass;
     }
 

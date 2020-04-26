@@ -8,12 +8,12 @@ import java.lang.reflect.Method;
 public class DtoInterModelPropertyDtoViewHandler {
 
     public void handle(DtoInterPropertyDefinition ipd) {
-        ipd.setViewCLass(Void.class);
+        ipd.setViewClass(Void.class);
         Method dtoMethod = ipd.getDtoMethod();
         DtoView dtoView = dtoMethod.getAnnotation(DtoView.class);
         if (dtoView != null) {
             Class<?> viewClass = dtoView.viewClass();
-            ipd.setViewCLass(viewClass);
+            ipd.setViewClass(viewClass);
         }
     }
 }

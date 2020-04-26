@@ -55,8 +55,8 @@ public class DtoClassViewRegister implements DtoViewRegister {
                 } else if (dcpd.getParserClass().contains(parserClass)) {
                     cvpd.getFields().add(dcpd.getDtoField());
                 }
-                dtoViewDefinitionPool.addViewProperty(parserClass, md, cvpd);
             }
+            dtoViewDefinitionPool.addViewProperty(parserClass, md, cvpd);
         }
 
     }

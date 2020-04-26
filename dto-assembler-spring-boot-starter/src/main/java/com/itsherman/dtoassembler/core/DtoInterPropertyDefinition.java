@@ -1,8 +1,8 @@
 package com.itsherman.dtoassembler.core;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DtoInterPropertyDefinition extends ModelPropertyDefinition {
 
@@ -12,9 +12,9 @@ public class DtoInterPropertyDefinition extends ModelPropertyDefinition {
 
     private Method sourceReadMethod;
 
-    private Class<?> viewCLass;
+    private Class<?> viewClass;
 
-    private List<Class<?>> parserClass = new ArrayList<>();
+    private Set<Class<?>> parserClass = new HashSet<>();
 
     public Method getDtoMethod() {
         return dtoMethod;
@@ -42,19 +42,19 @@ public class DtoInterPropertyDefinition extends ModelPropertyDefinition {
         this.sourceReadMethod = sourceReadMethod;
     }
 
-    public Class<?> getViewCLass() {
-        return viewCLass;
+    public Class<?> getViewClass() {
+        return viewClass;
     }
 
-    public void setViewCLass(Class<?> viewCLass) {
-        this.viewCLass = viewCLass;
+    public void setViewClass(Class<?> viewClass) {
+        this.viewClass = viewClass;
     }
 
-    public List<Class<?>> getParserClass() {
+    public Set<Class<?>> getParserClass() {
         return parserClass;
     }
 
-    public void setParserClass(List<Class<?>> parserClass) {
+    public void setParserClass(Set<Class<?>> parserClass) {
         this.parserClass = parserClass;
     }
 }

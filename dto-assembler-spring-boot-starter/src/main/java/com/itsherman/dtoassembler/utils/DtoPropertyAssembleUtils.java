@@ -13,7 +13,7 @@ import java.util.Collections;
 
 public class DtoPropertyAssembleUtils {
 
-    public static Object doAssemble(Type dtoReturnType, Object sourceReturnValue) {
+    public static Object doAssemble(Type dtoReturnType, Class<?> viewClass, Object sourceReturnValue) {
         if (dtoReturnType instanceof Class) {
             Class<?> dtoReturnClass = (Class) dtoReturnType;
             DtoViewDefinitionPool pool = SpringUtils.getBean("dtoViewDefinitionPool", DtoViewDefinitionPool.class);
@@ -24,11 +24,11 @@ public class DtoPropertyAssembleUtils {
                 Object dtoArray = Array.newInstance(componentType, sourceArray.length);
                 for (int i = 0; i < sourceArray.length; i++) {
                     Object sourceValue = sourceArray[i];
-                    Array.set(dtoArray, i, sourceValue == null ? null : sourceValue == null ? null : doAssemble(componentType, sourceValue));
+                    Array.set(dtoArray, i, sourceValue == null ? null : sourceValue == null ? null : doAssemble(componentType, viewClass, sourceValue));
                 }
                 return dtoArray;
-            } else if (pool.getViewDefinition(dtoReturnClass, Void.class) != null) {
-                return DtoAssembleUtils.assemble(dtoReturnClass, Void.class, sourceReturnValue);
+            } else if (pool.getViewDefinition(dtoReturnClass, viewClass) != null) {
+                return DtoAssembleUtils.assemble(dtoReturnClass, viewClass, sourceReturnValue);
             } else if (Modifier.isFinal(dtoReturnClass.getModifiers()) || dtoReturnClass.isPrimitive()) {
                 return sourceReturnValue;
             }
@@ -40,7 +40,7 @@ public class DtoPropertyAssembleUtils {
                 Collection<Object> dtoReturnValues = CollectionUtils.emptyCollection(parameterizedReturnType);
                 for (Object returnValue : sourceReturnValues) {
                     if (returnValue != null) {
-                        Object proxy = doAssemble(actualTypeArguments[0], returnValue);
+                        Object proxy = doAssemble(actualTypeArguments[0], viewClass, returnValue);
                         Collections.addAll(dtoReturnValues, proxy);
                     }
                 }

@@ -73,7 +73,7 @@ public class DtoInterfaceProxy<T, R> implements InvocationHandler {
                             if (readMethodValue != null) {
                                 Type returnType = propertyDefinition.getDtoMethod().getGenericReturnType();
                                 try {
-                                    result = DtoPropertyAssembleUtils.doAssemble(returnType, readMethodValue);
+                                    result = DtoPropertyAssembleUtils.doAssemble(returnType, propertyDefinition.getViewClass(), readMethodValue);
                                 } catch (RuntimeException e) {
                                     throw new DtoAssembleException(String.format("无法编集 %s 到 %s。 目标类型：%s, 原因：%s", readMethod.getName(), propertyDefinition.getDtoMethod().getName(), md.getDtoClass().getSimpleName(), e.getMessage()), e);
                                 }
