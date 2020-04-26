@@ -13,6 +13,6 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123456
-    url: jdbc:mysql://192.168.42.108:3306/dto_example?characterEncoding=UTF-8
+    password: Da0ben2014
+    url: jdbc:mysql://192.168.42.66:3306/dto_transform_test?characterEncoding=UTF-8
     platform: mysql
