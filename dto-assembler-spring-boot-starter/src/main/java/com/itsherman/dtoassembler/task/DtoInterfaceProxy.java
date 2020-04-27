@@ -10,10 +10,7 @@ import com.itsherman.dtoassembler.utils.SpringUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class DtoInterfaceProxy<T, R> implements InvocationHandler {
 
@@ -46,10 +43,12 @@ public class DtoInterfaceProxy<T, R> implements InvocationHandler {
             List<ModelPropertyDefinition> mpds = md.getMpds();
             for (ModelPropertyDefinition mpd : mpds) {
                 DtoInterPropertyDefinition propertyDefinition = (DtoInterPropertyDefinition) mpd;
-                List<Method> dtoMethods = dvd.getVpds().stream().map(vpd -> {
+                Set<ViewPropertyDefinition> vpds = dvd.getVpds();
+                Set<Method> dtoMethods = new HashSet<>();
+                for (ViewPropertyDefinition vpd : vpds) {
                     InterViewPropertyDefinition ivpd = (InterViewPropertyDefinition) vpd;
-                    return ivpd.getDtoMethod();
-                }).collect(Collectors.toList());
+                    dtoMethods.addAll(ivpd.getDtoMethods());
+                }
                 if (dtoMethods.contains(method)) {
                     if (propertyDefinition.getDtoMethod().equals(method)) {
                         if (method.isDefault()) {

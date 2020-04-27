@@ -15,6 +15,10 @@ public class DtoInterPropertyParserClassHandler {
         if (viewParser != null) {
             Class<?>[] parserClasses = viewParser.parserClasses();
             Collections.addAll(ipd.getParserClass(), parserClasses);
+            String[] referenceNames = viewParser.referenceFieldNames();
+            if (referenceNames.length > 0) {
+                ipd.setReferenceDtoMethodNames(referenceNames);
+            }
         }
     }
 }

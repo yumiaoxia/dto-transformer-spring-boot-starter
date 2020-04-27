@@ -1,15 +1,14 @@
 package com.itsherman.dtoassembler.core;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ClassViewPropertyDefinition extends ViewPropertyDefinition {
 
-    private List<Field> fields = new ArrayList<>();
+    private Set<Field> fields = new HashSet<>();
 
-    public List<Field> getFields() {
+    public Set<Field> getFields() {
         return fields;
     }
-
 }

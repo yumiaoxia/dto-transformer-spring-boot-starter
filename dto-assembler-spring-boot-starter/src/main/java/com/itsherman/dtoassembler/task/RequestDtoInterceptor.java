@@ -17,6 +17,7 @@ public class RequestDtoInterceptor implements HandlerInterceptor {
         if (handler instanceof HandlerMethod) {
             HandlerMethod hm = (HandlerMethod) handler;
             Method method = hm.getMethod();
+            this.viewClass = Void.class;
             DtoView dtoView = method.getAnnotation(DtoView.class);
             if (dtoView != null) {
                 this.viewClass = dtoView.viewClass();
@@ -26,7 +27,7 @@ public class RequestDtoInterceptor implements HandlerInterceptor {
     }
 
     public Class<?> getViewClass() {
-        return viewClass == null ? Void.class : viewClass;
+        return this.viewClass;
     }
 
 }

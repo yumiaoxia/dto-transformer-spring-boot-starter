@@ -16,6 +16,8 @@ public class DtoInterPropertyDefinition extends ModelPropertyDefinition {
 
     private Set<Class<?>> parserClass = new HashSet<>();
 
+    private String[] referenceDtoMethodNames;
+
     public Method getDtoMethod() {
         return dtoMethod;
     }
@@ -56,5 +58,14 @@ public class DtoInterPropertyDefinition extends ModelPropertyDefinition {
 
     public void setParserClass(Set<Class<?>> parserClass) {
         this.parserClass = parserClass;
+    }
+
+
+    public String[] getReferenceDtoMethodNames() {
+        return referenceDtoMethodNames;
+    }
+
+    public void setReferenceDtoMethodNames(String[] referenceDtoMethodNames) {
+        this.referenceDtoMethodNames = referenceDtoMethodNames;
     }
 }

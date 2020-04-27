@@ -1,16 +1,18 @@
 package com.itsherman.dtoassembler.core;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InterViewPropertyDefinition extends ViewPropertyDefinition {
 
-    private Method dtoMethod;
+    private Set<Method> dtoMethods = new HashSet<>();
 
-    public Method getDtoMethod() {
-        return dtoMethod;
+    public Set<Method> getDtoMethods() {
+        return dtoMethods;
     }
 
-    public void setDtoMethod(Method dtoMethod) {
-        this.dtoMethod = dtoMethod;
+    public void setDtoMethods(Set<Method> dtoMethods) {
+        this.dtoMethods = dtoMethods;
     }
 }

@@ -18,6 +18,8 @@ public class DtoClassPropertyParserClassHandler {
             if (viewParser != null) {
                 Class<?>[] parserClasses = viewParser.parserClasses();
                 Collections.addAll(dcpd.getParserClass(), parserClasses);
+                String[] referenceFieldNames = viewParser.referenceFieldNames();
+                dcpd.setReferenceFieldNames(referenceFieldNames);
             }
             Field field = dcpd.getDtoField();
             if (field != null) {
@@ -26,9 +28,6 @@ public class DtoClassPropertyParserClassHandler {
                     Class<?>[] parserClasses = viewParser.parserClasses();
                     Collections.addAll(dcpd.getParserClass(), parserClasses);
                 }
-            } else {
-                String[] referenceFieldNames = viewParser.referenceFieldNames();
-                dcpd.setReferenceFieldNames(referenceFieldNames);
             }
         } else {
             Field field = dcpd.getDtoField();

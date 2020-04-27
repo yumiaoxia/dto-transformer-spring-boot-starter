@@ -1,13 +1,13 @@
 package com.itsherman.dtoassembler.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DtoViewDefinition {
 
     private DtoModelDefinition md;
 
-    private List<ViewPropertyDefinition> vpds = new ArrayList<>();
+    private Set<ViewPropertyDefinition> vpds = new HashSet<>();
 
     public DtoModelDefinition getMd() {
         return md;
@@ -17,11 +17,11 @@ public class DtoViewDefinition {
         this.md = md;
     }
 
-    public List<ViewPropertyDefinition> getVpds() {
+    public Set<ViewPropertyDefinition> getVpds() {
         return vpds;
     }
 
-    public void setVpds(List<ViewPropertyDefinition> vpds) {
+    public void setVpds(Set<ViewPropertyDefinition> vpds) {
         this.vpds = vpds;
     }
 }
