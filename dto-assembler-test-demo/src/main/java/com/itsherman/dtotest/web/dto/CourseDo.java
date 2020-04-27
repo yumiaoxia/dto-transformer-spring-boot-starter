@@ -2,17 +2,17 @@ package com.itsherman.dtotest.web.dto;
 
 import com.itsherman.dtoassembler.annotations.DtoModel;
 import com.itsherman.dtoassembler.annotations.DtoProperty;
-import com.itsherman.dtoassembler.annotations.ViewParser;
+import com.itsherman.dtoassembler.annotations.DtoView;
 import com.itsherman.dtotest.domain.Course;
 
 @DtoModel(from = Course.class)
 public class CourseDo {
 
     @DtoProperty(value = "courseName")
-    @ViewParser(parserClasses = {BaseCourse2.class})
+    @DtoView(viewClasses = {BaseCourse2.class})
     private String name;
 
-    @ViewParser(parserClasses = {Void.class})
+    @DtoView(viewClasses = {Void.class})
     private Double score;
 
     public String getName() {

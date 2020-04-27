@@ -1,6 +1,6 @@
 package com.itsherman.dtotest.web.controller;
 
-import com.itsherman.dtoassembler.annotations.DtoView;
+import com.itsherman.dtoassembler.annotations.ViewSelector;
 import com.itsherman.dtoassembler.utils.DtoTransFormer;
 import com.itsherman.dtotest.domain.*;
 import com.itsherman.dtotest.web.dto.PersonDto;
@@ -60,7 +60,7 @@ public class PersonController {
         return ApiResponse.createSuccess(result);
     }
 
-    @DtoView(viewClass = PersonDto.BasePerson.class)
+    @ViewSelector(selectView = PersonDto.BasePerson.class)
     @ApiOperation("带@DtoView注解,viewClass=BasePerson")
     @GetMapping("/detail3/{id}")
     public ApiResponse<PersonDto> getPerson3(@PathVariable("id") Long id) {
@@ -77,7 +77,7 @@ public class PersonController {
         return ApiResponse.createSuccess(result);
     }
 
-    @DtoView(viewClass = PersonDto.MiniPerson.class)
+    @ViewSelector(selectView = PersonDto.MiniPerson.class)
     @ApiOperation("带@DtoView注解,viewClass=MiniPerson")
     @GetMapping("/detail4/{id}")
     public ApiResponse<PersonDto> getPerson4(@PathVariable("id") Long id) {
@@ -94,7 +94,7 @@ public class PersonController {
         return ApiResponse.createSuccess(result);
     }
 
-    @DtoView(viewClass = PersonDto.BirthPerson.class)
+    @ViewSelector(selectView = PersonDto.BirthPerson.class)
     @ApiOperation("带@DtoView注解,viewClass=BirthPerson")
     @GetMapping("/detail5/{id}")
     public ApiResponse<PersonDto> getPerson5(@PathVariable("id") Long id) {

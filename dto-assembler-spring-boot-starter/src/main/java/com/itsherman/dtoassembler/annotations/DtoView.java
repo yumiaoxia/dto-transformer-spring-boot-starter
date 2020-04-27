@@ -8,5 +8,7 @@ import java.lang.annotation.*;
 @Inherited
 public @interface DtoView {
 
-    Class<?> viewClass() default Void.class;
+    Class<?>[] viewClasses() default {};
+
+    String[] referenceNames() default {};
 }

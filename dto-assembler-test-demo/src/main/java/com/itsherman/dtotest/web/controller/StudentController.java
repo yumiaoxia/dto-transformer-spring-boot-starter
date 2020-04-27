@@ -1,6 +1,6 @@
 package com.itsherman.dtotest.web.controller;
 
-import com.itsherman.dtoassembler.annotations.DtoView;
+import com.itsherman.dtoassembler.annotations.ViewSelector;
 import com.itsherman.dtoassembler.utils.DtoTransFormer;
 import com.itsherman.dtotest.entity.Student;
 import com.itsherman.dtotest.entity.Teacher;
@@ -64,7 +64,7 @@ public class StudentController {
     }
 
 
-    @DtoView(viewClass = StudentDto.BaseStudent.class)
+    @ViewSelector(selectView = StudentDto.BaseStudent.class)
     @ApiOperation("获取学生详情,接口带@DtoView注解")
     @GetMapping("/detail2/{id}")
     public ApiResponse<StudentDto> detail2(@PathVariable Long id) {

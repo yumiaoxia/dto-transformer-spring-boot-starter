@@ -1,19 +1,19 @@
 package com.itsherman.dtotest.web.dto;
 
 import com.itsherman.dtoassembler.annotations.DtoModel;
-import com.itsherman.dtoassembler.annotations.ViewParser;
+import com.itsherman.dtoassembler.annotations.DtoView;
 import com.itsherman.dtotest.domain.Dog;
 
 @DtoModel(from = Dog.class)
 public interface DogDto {
 
-    @ViewParser(parserClasses = {DogDo.MiniDog.class, DogDo.BaseDog.class})
+    @DtoView(viewClasses = {DogDo.MiniDog.class, DogDo.BaseDog.class})
     String getFirstName();
 
-    @ViewParser(parserClasses = {DogDo.MiniDog.class, DogDo.BaseDog.class})
+    @DtoView(viewClasses = {DogDo.MiniDog.class, DogDo.BaseDog.class})
     String getLastName();
 
-    @ViewParser(parserClasses = DogDo.BaseDog.class, referenceFieldNames = {"getFirstName", "getLastName"})
+    @DtoView(viewClasses = DogDo.BaseDog.class, referenceNames = {"getFirstName", "getLastName"})
     default String getFullName() {
         if (getFirstName() != null && getLastName() != null) {
             return getFirstName() + " " + getLastName();

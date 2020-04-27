@@ -1,7 +1,7 @@
 package com.itsherman.dtotest.web.dto;
 
 import com.itsherman.dtoassembler.annotations.DtoModel;
-import com.itsherman.dtoassembler.annotations.DtoView;
+import com.itsherman.dtoassembler.annotations.ViewSelector;
 import com.itsherman.dtotest.domain.Student2;
 
 import java.util.List;
@@ -13,6 +13,6 @@ public interface Student2Dto2 {
 
     String getName();
 
-    @DtoView(viewClass = Void.class)
+    @ViewSelector(selectView = Void.class)
     List<CourseDo> getCourses();
 }

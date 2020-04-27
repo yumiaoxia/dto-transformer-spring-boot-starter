@@ -1,6 +1,6 @@
 package com.itsherman.dtoassembler.task;
 
-import com.itsherman.dtoassembler.annotations.DtoView;
+import com.itsherman.dtoassembler.annotations.ViewSelector;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,9 +18,9 @@ public class RequestDtoInterceptor implements HandlerInterceptor {
             HandlerMethod hm = (HandlerMethod) handler;
             Method method = hm.getMethod();
             this.viewClass = Void.class;
-            DtoView dtoView = method.getAnnotation(DtoView.class);
-            if (dtoView != null) {
-                this.viewClass = dtoView.viewClass();
+            ViewSelector viewSelector = method.getAnnotation(ViewSelector.class);
+            if (viewSelector != null) {
+                this.viewClass = viewSelector.selectView();
             }
         }
         return true;

@@ -6,9 +6,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface ViewParser {
+public @interface ViewSelector {
 
-    Class<?>[] parserClasses() default {};
-
-    String[] referenceFieldNames() default {};
+    Class<?> selectView() default Void.class;
 }

@@ -1,6 +1,6 @@
 package com.itsherman.dtoassembler.handler.clazz;
 
-import com.itsherman.dtoassembler.annotations.ViewParser;
+import com.itsherman.dtoassembler.annotations.DtoView;
 import com.itsherman.dtoassembler.core.DtoClassPropertyDefinition;
 
 import java.lang.reflect.Field;
@@ -14,27 +14,27 @@ public class DtoClassPropertyParserClassHandler {
         dcpd.getParserClass().add(Void.class);
         Method readMethod = dcpd.getDtoReadMethod();
         if (readMethod != null) {
-            ViewParser viewParser = readMethod.getAnnotation(ViewParser.class);
-            if (viewParser != null) {
-                Class<?>[] parserClasses = viewParser.parserClasses();
+            DtoView dtoView = readMethod.getAnnotation(DtoView.class);
+            if (dtoView != null) {
+                Class<?>[] parserClasses = dtoView.viewClasses();
                 Collections.addAll(dcpd.getParserClass(), parserClasses);
-                String[] referenceFieldNames = viewParser.referenceFieldNames();
+                String[] referenceFieldNames = dtoView.referenceNames();
                 dcpd.setReferenceFieldNames(referenceFieldNames);
             }
             Field field = dcpd.getDtoField();
             if (field != null) {
-                viewParser = field.getAnnotation(ViewParser.class);
-                if (viewParser != null) {
-                    Class<?>[] parserClasses = viewParser.parserClasses();
+                dtoView = field.getAnnotation(DtoView.class);
+                if (dtoView != null) {
+                    Class<?>[] parserClasses = dtoView.viewClasses();
                     Collections.addAll(dcpd.getParserClass(), parserClasses);
                 }
             }
         } else {
             Field field = dcpd.getDtoField();
             if (field != null) {
-                ViewParser viewParser = field.getAnnotation(ViewParser.class);
-                if (viewParser != null) {
-                    Class<?>[] parserClasses = viewParser.parserClasses();
+                DtoView dtoView = field.getAnnotation(DtoView.class);
+                if (dtoView != null) {
+                    Class<?>[] parserClasses = dtoView.viewClasses();
                     Collections.addAll(dcpd.getParserClass(), parserClasses);
                 }
             }

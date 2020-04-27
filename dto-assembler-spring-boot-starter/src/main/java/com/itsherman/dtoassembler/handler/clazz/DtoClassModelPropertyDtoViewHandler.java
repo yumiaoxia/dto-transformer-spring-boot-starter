@@ -1,7 +1,7 @@
 package com.itsherman.dtoassembler.handler.clazz;
 
 
-import com.itsherman.dtoassembler.annotations.DtoView;
+import com.itsherman.dtoassembler.annotations.ViewSelector;
 import com.itsherman.dtoassembler.core.DtoClassPropertyDefinition;
 
 import java.lang.reflect.Field;
@@ -13,23 +13,23 @@ public class DtoClassModelPropertyDtoViewHandler {
         Method dtoWriteMethod = dcpd.getDtoWriteMethod();
         Class<?> viewClass = Void.class;
         if (dtoWriteMethod != null) {
-            DtoView dtoView = dtoWriteMethod.getAnnotation(DtoView.class);
-            if (dtoView != null) {
-                viewClass = dtoView.viewClass();
+            ViewSelector viewSelector = dtoWriteMethod.getAnnotation(ViewSelector.class);
+            if (viewSelector != null) {
+                viewClass = viewSelector.selectView();
             }
             Field field = dcpd.getDtoField();
             if (field != null) {
-                dtoView = field.getAnnotation(DtoView.class);
-                if (dtoView != null) {
-                    viewClass = dtoView.viewClass();
+                viewSelector = field.getAnnotation(ViewSelector.class);
+                if (viewSelector != null) {
+                    viewClass = viewSelector.selectView();
                 }
             }
         } else {
             Field field = dcpd.getDtoField();
             if (field != null) {
-                DtoView dtoView = field.getAnnotation(DtoView.class);
-                if (dtoView != null) {
-                    viewClass = dtoView.viewClass();
+                ViewSelector viewSelector = field.getAnnotation(ViewSelector.class);
+                if (viewSelector != null) {
+                    viewClass = viewSelector.selectView();
                 }
             }
         }

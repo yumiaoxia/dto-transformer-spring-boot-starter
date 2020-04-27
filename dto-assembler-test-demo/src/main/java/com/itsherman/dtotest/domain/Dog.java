@@ -8,6 +8,8 @@ public class Dog {
 
     private Integer age;
 
+    private String bark;
+
     public String getFirstName() {
         return firstName;
     }
@@ -30,5 +32,13 @@ public class Dog {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getBark() {
+        return bark;
+    }
+
+    public void setBark(String bark) {
+        this.bark = bark;
     }
 }
