@@ -3,6 +3,11 @@ spring:
     messages:
       basename: classpath:i18n/messages
       encoding: UTF-8
+    api-log:
+      type: all
+    format:
+      pattern:
+        date-time: dd/MM/yyyy HH:mm:ss
   jpa:
     hibernate:
       ddl-auto: update

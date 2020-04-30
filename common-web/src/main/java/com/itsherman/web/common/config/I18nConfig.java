@@ -29,7 +29,6 @@ public class I18nConfig implements WebMvcConfigurer {
         return new MyLocaleResolver();
     }
 
-
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

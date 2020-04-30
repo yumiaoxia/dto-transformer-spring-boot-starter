@@ -66,32 +66,36 @@ public class ApiResponse<T> implements Serializable {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public ApiResponse<T> setSuccess(Boolean success) {
         this.success = success;
+        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public ApiResponse<T> setMessage(String message) {
         this.message = message;
+        return this;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public ApiResponse<T> setData(T data) {
         this.data = data;
+        return this;
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public ApiResponse<T> setCode(String code) {
         this.code = code;
+        return this;
     }
 
     @Override

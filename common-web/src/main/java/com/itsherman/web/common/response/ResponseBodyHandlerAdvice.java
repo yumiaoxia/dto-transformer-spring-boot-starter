@@ -1,5 +1,7 @@
 package com.itsherman.web.common.response;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsherman.web.common.config.properties.ApiLogProperties;
 import com.itsherman.web.common.enums.ApiLogEnum;
 import com.itsherman.web.common.request.RequestWrapper;
@@ -38,7 +40,7 @@ import java.util.Set;
  * @since 2019-09-06
  */
 @ControllerAdvice(annotations = {RestController.class, ResponseBody.class, ControllerAdvice.class})
-public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<ApiResponse> {
+public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<ApiResponse<?>> {
 
     private static final Logger log = LoggerFactory.getLogger(ResponseBodyHandlerAdvice.class);
 
@@ -50,19 +52,26 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<ApiResponse
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
         return true;
     }
 
     @Override
-    public ApiResponse beforeBodyWrite(ApiResponse apiResponse, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public ApiResponse<?> beforeBodyWrite(ApiResponse<?> apiResponse, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         if (apiResponse != null) {
             HttpServletRequest request = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
-            apiResponse.setMessage(messageSource.getMessage(apiResponse.getCode(), null, LocaleContextHolder.getLocale()));
             if (apiResponse.getSuccess().equals(true)) {
+                apiResponse.setMessage(messageSource.getMessage(apiResponse.getCode(), null, LocaleContextHolder.getLocale()));
                 if (apiLogProperties.getType().equals(ApiLogEnum.ALL)) {
-                    log.info("\nrequestURL: {},\nheaders:{}, \nparams: {}, \nuserIP: {}, \ndata: {}", request.getRequestURL(), getRequestHeaders(request), getRequestParams(request), IPUtil.getUserIP(request), apiResponse.getData());
+                    try {
+                        log.info("\nrequestURL: {},\nheaders:{}, \nparams: {}, \nuserIP: {}, \ndata: {}", request.getRequestURL(), getRequestHeaders(request), getRequestParams(request), IPUtil.getUserIP(request), objectMapper.writeValueAsString(apiResponse.getData()));
+                    } catch (JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             if (apiResponse.getSuccess().equals(false) && !apiLogProperties.getType().equals(ApiLogEnum.NONE)) {
