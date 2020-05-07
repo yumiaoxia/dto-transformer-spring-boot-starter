@@ -1,5 +1,6 @@
 package com.itsherman.web.common.exception;
 
+import com.itsherman.web.common.enums.CommonResponseEnum;
 import com.itsherman.web.common.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +30,19 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public ApiResponse handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage(CommonErrorCode.SYSTEM_EXCEPTION, null, LocaleContextHolder.getLocale());
-        return ApiResponse.createError().setMessage(message);
+        CommonResponseEnum responseEnum = CommonResponseEnum.SYSTEM_ERROR;
+        String message = responseEnum.getMessage();
+        String code = responseEnum.getCode();
+        return ApiResponse.createError(code).setMessage(message);
     }
 
     @ResponseBody
     @ExceptionHandler(ServiceException.class)
     public ApiResponse handleServiceException(ServiceException ex) {
         log.error(ex.getMessage(), ex);
+        if (ex.getCause() != null) {
+            log.error(ex.getCause().getMessage(), ex.getCause());
+        }
         Object[] args = ex.getArgs();
         if (args != null && args.length > 0) {
             for (int i = 0; i < args.length; i++) {
@@ -44,9 +50,7 @@ public class ExceptionController {
                 args[i] = messageSource.getMessage(argStr, null, LocaleContextHolder.getLocale());
             }
         }
-        String msg = messageSource.getMessage(ex.getCode(), args, LocaleContextHolder.getLocale());
+        String msg = messageSource.getMessage(ex.getMessage().replaceAll(" ", ".").toLowerCase(), args, LocaleContextHolder.getLocale());
         return ApiResponse.createError(ex.getCode()).setMessage(msg);
     }
-
-
 }

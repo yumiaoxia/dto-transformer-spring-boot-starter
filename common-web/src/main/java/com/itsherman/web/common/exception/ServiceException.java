@@ -1,13 +1,29 @@
 package com.itsherman.web.common.exception;
 
+import com.itsherman.web.common.enums.IResponseEnum;
+
 public class ServiceException extends BaseException {
 
-    public ServiceException(String errCode) {
+    private String code;
+
+    public ServiceException(IResponseEnum responseEnum) {
+        super(responseEnum);
+        this.code = responseEnum.getCode();
     }
 
-    public ServiceException(String errCode, Object[] args) {
+    public ServiceException(IResponseEnum responseEnum, Object[] args) {
+        super(responseEnum, args);
+        this.code = responseEnum.getCode();
     }
 
-    public ServiceException(String errCode, Object[] args, Throwable cause) {
+    public ServiceException(IResponseEnum responseEnum, Object[] args, Throwable cause) {
+        super(cause, responseEnum, args);
+        this.code = responseEnum.getCode();
     }
+
+    public String getCode() {
+        return code;
+    }
+
+
 }

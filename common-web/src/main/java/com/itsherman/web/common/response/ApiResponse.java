@@ -1,7 +1,7 @@
 package com.itsherman.web.common.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.itsherman.web.common.exception.CommonErrorCode;
+import com.itsherman.web.common.enums.CommonResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -39,7 +39,7 @@ public class ApiResponse<T> implements Serializable {
     }
 
     public static <T> ApiResponse<T> createSuccess(T t) {
-        return createSuccess(CommonErrorCode.SUCCESS, t);
+        return createSuccess(CommonResponseEnum.OK.getCode(), t);
     }
 
     public static <T> ApiResponse<T> createSuccess(String code, T t) {
@@ -51,7 +51,7 @@ public class ApiResponse<T> implements Serializable {
     }
 
     public static <T> ApiResponse<T> createError() {
-        return createError(CommonErrorCode.SYSTEM_EXCEPTION);
+        return createError(CommonResponseEnum.SYSTEM_ERROR.getCode());
     }
 
     public static <T> ApiResponse<T> createError(String code) {

@@ -4,19 +4,18 @@ import com.itsherman.web.common.enums.IResponseEnum;
 
 public interface ServiceExceptionAssert extends ServiceAssert, IResponseEnum {
 
-
     @Override
-    default BaseException newException() {
-        return new ServiceException(this.getCode());
+    default ServiceException newException() {
+        return new ServiceException(this);
     }
 
     @Override
-    default BaseException newException(Object... args) {
-        return new ServiceException(this.getCode(), args);
+    default ServiceException newException(Object... args) {
+        return new ServiceException(this, args);
     }
 
     @Override
-    default BaseException newException(Throwable t, Object... args) {
-        return new ServiceException(t, args);
+    default ServiceException newException(Throwable t, Object... args) {
+        return new ServiceException(this, args, t);
     }
 }

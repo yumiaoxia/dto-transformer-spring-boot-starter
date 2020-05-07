@@ -39,4 +39,5 @@ public interface ServiceAssert extends Assert {
             throw newException(args);
         }
     }
+
 }

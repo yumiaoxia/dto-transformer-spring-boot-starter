@@ -1,6 +1,6 @@
 package com.itsherman.dtotest.web.controller;
 
-import com.itsherman.web.common.exception.ServiceExceptionAssert;
+import com.itsherman.dtotest.exception.ServiceResponseEnum;
 import com.itsherman.web.common.response.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +16,23 @@ public class ExceptionTestController {
     @ApiOperation("测试业务异常")
     @GetMapping("/service")
     public ApiResponse<Void> ServiceErr() {
-        ServiceExceptionAssert
+        Object obj = null;
+        ServiceResponseEnum.SYSTEM_ERROR.assertNotNull(obj);
+        return ApiResponse.createSuccess();
+    }
+
+    @ApiOperation("测试携带参数业务异常")
+    @GetMapping("/service/parameter")
+    public ApiResponse<Void> ServicePatamErr() {
+        Object obj = null;
+        ServiceResponseEnum.PARAMETER_ERROR.assertNotNull(obj, "parameter");
+        return ApiResponse.createSuccess();
+    }
+
+    @ApiOperation("测试运行实异常导致业务异常")
+    @GetMapping("/service/newException")
+    public ApiResponse<Void> ServicenewErr() {
+        ServiceResponseEnum.CAUSE_ERROR.cause(new NullPointerException(), "sql");
         return ApiResponse.createSuccess();
     }
 
