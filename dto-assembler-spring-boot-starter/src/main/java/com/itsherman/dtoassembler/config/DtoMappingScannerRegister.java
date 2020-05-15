@@ -72,9 +72,9 @@ public class DtoMappingScannerRegister implements ImportBeanDefinitionRegistrar 
                 }
             }
             Set<Class<?>> dtoClasses = filterByAnnotation(classNames);
-            DtoClassesHolder.getInstance().setDtoClasses(dtoClasses);
+            DtoClassesHolder.getInstance().getDtoClasses().addAll(dtoClasses);
         } else {
-            LOGGER.warn("basePackages must be specified!");
+            LOGGER.error("[Dto Warning] - BasePackages must be specified and contains DtoClasses! The incorrect package is " + basePackage);
         }
     }
 

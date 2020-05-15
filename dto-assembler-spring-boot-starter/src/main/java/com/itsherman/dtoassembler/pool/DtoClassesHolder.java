@@ -1,11 +1,12 @@
 package com.itsherman.dtoassembler.pool;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class DtoClassesHolder {
 
     private static final DtoClassesHolder DTO_CLASSES_HOLDER = new DtoClassesHolder();
-    private Set<Class<?>> dtoClasses;
+    private Set<Class<?>> dtoClasses = new HashSet<>();
 
     private DtoClassesHolder() {
     }
@@ -16,9 +17,5 @@ public class DtoClassesHolder {
 
     public Set<Class<?>> getDtoClasses() {
         return dtoClasses;
-    }
-
-    public void setDtoClasses(Set<Class<?>> dtoClasses) {
-        this.dtoClasses = dtoClasses;
     }
 }
