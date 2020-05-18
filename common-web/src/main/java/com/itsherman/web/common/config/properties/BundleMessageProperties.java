@@ -1,4 +1,4 @@
-package com.itsherman.web.common.locale;
+package com.itsherman.web.common.config.properties;
 
 import org.springframework.boot.autoconfigure.context.MessageSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,6 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author 俞淼霞
  * @since 2019-09-06
  */
-@ConfigurationProperties(prefix = "spring.common-web.messages")
+@ConfigurationProperties(prefix = "spring.messages")
 public class BundleMessageProperties extends MessageSourceProperties {
 }

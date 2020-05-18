@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsherman.web.common.config.properties.ApiLogProperties;
 import com.itsherman.web.common.enums.ApiLogEnum;
-import com.itsherman.web.common.enums.CommonResponseEnum;
 import com.itsherman.web.common.request.RequestWrapper;
 import com.itsherman.web.common.utils.IPUtil;
 import org.slf4j.Logger;
@@ -66,7 +65,7 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<ApiResponse
         if (apiResponse != null) {
             HttpServletRequest request = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest();
             if (apiResponse.getSuccess().equals(true)) {
-                apiResponse.setMessage(messageSource.getMessage(CommonResponseEnum.OK.getMessage().replaceAll(" ", ".").toLowerCase(), null, LocaleContextHolder.getLocale()));
+                apiResponse.setMessage(messageSource.getMessage(apiResponse.getMessage().replaceAll(" ", ".").toLowerCase(), null, LocaleContextHolder.getLocale()));
                 if (apiLogProperties.getType().equals(ApiLogEnum.ALL)) {
                     try {
                         log.info("\nrequestURL: {},\nheaders:{}, \nparams: {}, \nuserIP: {}, \ndata: {}", request.getRequestURL(), getRequestHeaders(request), getRequestParams(request), IPUtil.getUserIP(request), objectMapper.writeValueAsString(apiResponse.getData()));

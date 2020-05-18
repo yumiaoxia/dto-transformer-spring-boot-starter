@@ -53,4 +53,22 @@
         </plugins>
     </build>
 
+    <!--    <repositories>-->
+    <!--    <repository>-->
+    <!--        <snapshots>-->
+    <!--            <enabled>true</enabled>-->
+    <!--        </snapshots>-->
+    <!--        <id>snapshots</id>-->
+    <!--        <name>snapshots Release Repositories</name>-->
+    <!--        <url>http://192.168.42.108:8081/repository/maven-snapshots/</url>-->
+    <!--    </repository>-->
+    <!--    </repositories>-->
+
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <url>http://192.168.42.108:8081/repository/maven-snapshots/</url>
+        </repository>
+    </distributionManagement>
+
 </project>

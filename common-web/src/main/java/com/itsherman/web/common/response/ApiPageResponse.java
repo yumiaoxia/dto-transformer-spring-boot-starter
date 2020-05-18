@@ -1,5 +1,6 @@
 package com.itsherman.web.common.response;
 
+import com.itsherman.web.common.enums.CommonResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.domain.Page;
@@ -28,16 +29,16 @@ public class ApiPageResponse<T> extends ApiResponse<T> {
     private Integer pageSize;
 
     public static <T> ApiPageResponse<List<T>> createPageSuccess(Page<T> t) {
-        return createPageSuccess("0", t);
+        return createPageSuccess(CommonResponseEnum.OK.getCode(), CommonResponseEnum.OK.getMessage(), t);
     }
 
-    public static <T> ApiPageResponse<List<T>> createPageSuccess(String code, Page<T> t) {
+    public static <T> ApiPageResponse<List<T>> createPageSuccess(String code, String message, Page<T> t) {
         if (t == null) {
             throw new NullPointerException("t must be not null!");
         }
         ApiPageResponse<List<T>> apiPageResponse = new ApiPageResponse<>();
         apiPageResponse.setSuccess(true);
-        apiPageResponse.setCode(code);
+        initCodeAndMessage(apiPageResponse, code, message);
         apiPageResponse.setTotalSize(t.getTotalElements());
         apiPageResponse.setTotalPage(t.getTotalPages());
         apiPageResponse.setPageNo(t.getNumber());

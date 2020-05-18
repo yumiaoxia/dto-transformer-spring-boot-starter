@@ -2,7 +2,7 @@ package com.itsherman.web.common.date;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "spring.common-web.format.pattern")
+@ConfigurationProperties(prefix = "spring.json.format.pattern")
 public class DateTimeProperties {
 
     private String date = "yyyy-MM-dd";

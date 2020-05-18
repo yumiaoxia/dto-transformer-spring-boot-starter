@@ -33,7 +33,7 @@ public class ExceptionController {
         CommonResponseEnum responseEnum = CommonResponseEnum.SYSTEM_ERROR;
         String message = responseEnum.getMessage();
         String code = responseEnum.getCode();
-        return ApiResponse.createError(code).setMessage(message);
+        return ApiResponse.createError(code, message);
     }
 
     @ResponseBody
@@ -51,6 +51,6 @@ public class ExceptionController {
             }
         }
         String msg = messageSource.getMessage(ex.getMessage().replaceAll(" ", ".").toLowerCase(), args, LocaleContextHolder.getLocale());
-        return ApiResponse.createError(ex.getCode()).setMessage(msg);
+        return ApiResponse.createError(ex.getCode(), msg);
     }
 }

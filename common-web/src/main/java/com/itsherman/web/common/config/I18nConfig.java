@@ -1,8 +1,9 @@
 package com.itsherman.web.common.config;
 
-import com.itsherman.web.common.locale.BundleMessageProperties;
+import com.itsherman.web.common.config.properties.BundleMessageProperties;
 import com.itsherman.web.common.locale.MyLocaleResolver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,7 @@ public class I18nConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @ConditionalOnMissingBean(name = "messageSource")
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setDefaultEncoding(bundleMessageProperties.getEncoding().name());

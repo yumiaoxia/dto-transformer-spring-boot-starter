@@ -39,26 +39,31 @@ public class ApiResponse<T> implements Serializable {
     }
 
     public static <T> ApiResponse<T> createSuccess(T t) {
-        return createSuccess(CommonResponseEnum.OK.getCode(), t);
+        return createSuccess(CommonResponseEnum.OK.getCode(), CommonResponseEnum.OK.getMessage(), t);
     }
 
-    public static <T> ApiResponse<T> createSuccess(String code, T t) {
+    public static <T> ApiResponse<T> createSuccess(String code, String message, T t) {
         ApiResponse<T> apiResponse = new ApiResponse<>();
         apiResponse.setSuccess(true);
-        apiResponse.setCode(code);
+        initCodeAndMessage(apiResponse, code, message);
         apiResponse.setData(t);
         return apiResponse;
     }
 
     public static <T> ApiResponse<T> createError() {
-        return createError(CommonResponseEnum.SYSTEM_ERROR.getCode());
+        return createError(CommonResponseEnum.SYSTEM_ERROR.getCode(), CommonResponseEnum.SYSTEM_ERROR.getMessage());
     }
 
-    public static <T> ApiResponse<T> createError(String code) {
+    public static <T> ApiResponse<T> createError(String code, String message) {
         ApiResponse<T> apiResponse = new ApiResponse<>();
         apiResponse.setSuccess(false);
-        apiResponse.setCode(code);
+        initCodeAndMessage(apiResponse, code, message);
         return apiResponse;
+    }
+
+    protected static void initCodeAndMessage(ApiResponse response, String code, String message) {
+        response.setCode(code);
+        response.setMessage(message);
     }
 
 
