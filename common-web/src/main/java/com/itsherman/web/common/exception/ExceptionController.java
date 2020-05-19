@@ -2,6 +2,7 @@ package com.itsherman.web.common.exception;
 
 import com.itsherman.web.common.enums.CommonResponseEnum;
 import com.itsherman.web.common.response.ApiResponse;
+import com.itsherman.web.common.utils.MessageUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -31,7 +32,7 @@ public class ExceptionController {
     public ApiResponse handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
         CommonResponseEnum responseEnum = CommonResponseEnum.SYSTEM_ERROR;
-        String message = responseEnum.getMessage();
+        String message = MessageUtils.getMessage(responseEnum.getMessage(), null);
         String code = responseEnum.getCode();
         return ApiResponse.createError(code, message);
     }

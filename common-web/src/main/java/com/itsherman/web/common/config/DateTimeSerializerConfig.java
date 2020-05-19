@@ -94,6 +94,7 @@ public class DateTimeSerializerConfig {
                         )
                         .serializationInclusion(JsonInclude.Include.NON_NULL)
                         .build()
+                        .enable(SerializationFeature.INDENT_OUTPUT)
                         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     }

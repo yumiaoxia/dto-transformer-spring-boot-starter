@@ -4,6 +4,7 @@ import com.itsherman.web.common.config.properties.ApiLogProperties;
 import com.itsherman.web.common.exception.ExceptionController;
 import com.itsherman.web.common.filter.ChanelFilter;
 import com.itsherman.web.common.response.ResponseBodyHandlerAdvice;
+import com.itsherman.web.common.utils.MessageUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,11 @@ public class CommonWebAutoConfiguration {
     @Bean
     public ResponseBodyHandlerAdvice responseBodyHandlerAdvice() {
         return new ResponseBodyHandlerAdvice();
+    }
+
+    @Bean
+    public MessageUtils messageUtils() {
+        return new MessageUtils();
     }
 
 }
