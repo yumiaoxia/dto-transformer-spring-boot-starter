@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +33,17 @@ public class ExceptionController {
     public ApiResponse handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
         CommonResponseEnum responseEnum = CommonResponseEnum.SYSTEM_ERROR;
-        String message = MessageUtils.getMessage(responseEnum.getMessage(), null);
+        String message = MessageUtils.getMessage(responseEnum.getMessage(), false, null);
+        String code = responseEnum.getCode();
+        return ApiResponse.createError(code, message);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ApiResponse handleMessageArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.error(ex.getMessage(), ex);
+        CommonResponseEnum responseEnum = CommonResponseEnum.ARGUMENT_NOT_VALID;
+        String message = MessageUtils.getMessage(responseEnum.getMessage(), false, ex.getBindingResult().getFieldError().getDefaultMessage());
         String code = responseEnum.getCode();
         return ApiResponse.createError(code, message);
     }

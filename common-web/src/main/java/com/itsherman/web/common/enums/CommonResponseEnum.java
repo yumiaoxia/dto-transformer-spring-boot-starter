@@ -5,6 +5,7 @@ import com.itsherman.web.common.exception.CommonAssert;
 public enum CommonResponseEnum implements CommonAssert {
 
     SYSTEM_ERROR("9999", "system error"),
+    ARGUMENT_NOT_VALID("0001", "argument not valid"),
     OK("0", "success");
 
     private final String code;
