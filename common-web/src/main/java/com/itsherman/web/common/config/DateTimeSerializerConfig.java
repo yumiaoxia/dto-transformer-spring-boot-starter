@@ -56,6 +56,7 @@ public class DateTimeSerializerConfig {
         return new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(dateTimeProperties.getDateTime()));
     }
 
+
     @Bean
     public InstantDeserializer<ZonedDateTime> instantDeserializer() {
         ZoneId zoneId = ZoneId.of(dateTimeProperties.getZoneId());

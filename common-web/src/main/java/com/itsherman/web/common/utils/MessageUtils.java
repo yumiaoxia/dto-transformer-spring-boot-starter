@@ -2,6 +2,7 @@ package com.itsherman.web.common.utils;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 public class MessageUtils implements MessageSourceAware {
@@ -14,7 +15,11 @@ public class MessageUtils implements MessageSourceAware {
                 variables[i] = messageSource.getMessage(variables[i].replaceAll(" ", ".").toLowerCase(), null, LocaleContextHolder.getLocale());
             }
         }
-        return messageSource.getMessage(msg.replaceAll(" ", ".").toLowerCase(), variables, LocaleContextHolder.getLocale());
+        try {
+            return messageSource.getMessage(msg.replaceAll(" ", ".").toLowerCase(), variables, LocaleContextHolder.getLocale());
+        } catch (NoSuchMessageException e) {
+            return msg;
+        }
 
     }
 

@@ -1,8 +1,6 @@
 package com.itsherman.web.common.enums;
 
-import com.itsherman.web.common.exception.CommonAssert;
-
-public enum CommonResponseEnum implements CommonAssert {
+public enum CommonResponseEnum implements IResponseEnum {
 
     SYSTEM_ERROR("9999", "system error"),
     ARGUMENT_NOT_VALID("0001", "argument not valid"),

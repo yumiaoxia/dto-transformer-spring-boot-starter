@@ -2,7 +2,7 @@ package com.itsherman.web.common.exception;
 
 import com.itsherman.web.common.enums.IResponseEnum;
 
-public interface ServiceExceptionAssert extends ServiceAssert, IResponseEnum {
+public interface ServiceExceptionAssert extends ExceptionAssertHandler<ServiceException>, IResponseEnum {
 
     @Override
     default ServiceException newException() {
@@ -10,12 +10,12 @@ public interface ServiceExceptionAssert extends ServiceAssert, IResponseEnum {
     }
 
     @Override
-    default ServiceException newException(Object... args) {
+    default ServiceException newException(String... args) {
         return new ServiceException(this, args);
     }
 
     @Override
-    default ServiceException newException(Throwable t, Object... args) {
+    default ServiceException newException(Throwable t, String... args) {
         return new ServiceException(this, args, t);
     }
 }

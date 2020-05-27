@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,12 +39,13 @@ public class ExceptionController {
         return ApiResponse.createError(code, message);
     }
 
+
     @ResponseBody
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiResponse handleMessageArgumentNotValidException(MethodArgumentNotValidException ex) {
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
+    public ApiResponse handleMessageArgumentNotValidException(Exception ex) {
         log.error(ex.getMessage(), ex);
         CommonResponseEnum responseEnum = CommonResponseEnum.ARGUMENT_NOT_VALID;
-        String message = MessageUtils.getMessage(responseEnum.getMessage(), false, ex.getBindingResult().getFieldError().getDefaultMessage());
+        String message = MessageUtils.getMessage(responseEnum.getMessage(), false);
         String code = responseEnum.getCode();
         return ApiResponse.createError(code, message);
     }
@@ -59,7 +61,7 @@ public class ExceptionController {
         if (args != null && args.length > 0) {
             for (int i = 0; i < args.length; i++) {
                 String argStr = args[i].toString();
-                args[i] = messageSource.getMessage(argStr, null, LocaleContextHolder.getLocale());
+                args[i] = MessageUtils.getMessage(argStr, false);
             }
         }
         String msg = messageSource.getMessage(ex.getMessage().replaceAll(" ", ".").toLowerCase(), args, LocaleContextHolder.getLocale());
